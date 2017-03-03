@@ -12,17 +12,28 @@ import java.awt.BorderLayout;
  * @author jinjar17
  */
 public class StartFrame extends javax.swing.JFrame {
-
+    private WelcomePanel p;
+    private GamePanel g;
+    private javax.swing.JPanel panels[] = new javax.swing.JPanel[2];
+    private int WIDTH = 400;
     /**
      * Creates new form StartFrame
      */
     public StartFrame() {
         initComponents();
-        WelcomePanel p = new WelcomePanel();
+        this.p = new WelcomePanel();
+        p.setParent(this);
+        p.setSize(WIDTH, WIDTH);
+        /*createPanel(p);
+        this.g = new GamePanel();
+        g.setParent(this);
+        g.setSize(WIDTH, WIDTH);
+        createPanel(g);
+        this.panels[0] = p;
+        this.panels[1] = g;*/
         this.setLayout(new BorderLayout());
         this.add(p, BorderLayout.CENTER);
         p.setVisible(true);
-        p.setParent(this);
     }
 
     /**
@@ -85,6 +96,17 @@ public class StartFrame extends javax.swing.JFrame {
         }); 
     }
     
+    /*
+    public void showPanel(int i){
+        this.add(panels[i], BorderLayout.CENTER);
+        panels[i].setVisible(true);
+    }
+    
+    public void createPanel(javax.swing.JPanel a){
+        a.setSize(400, 400);
+        this.add(a, BorderLayout.CENTER);
+    }
+    */
     public void createGame(){
         GamePanel g = new GamePanel();
         g.setSize(400, 400);
@@ -92,6 +114,7 @@ public class StartFrame extends javax.swing.JFrame {
         g.setVisible(true);
         g.setParent(this);
     }
+    
     
     public void createHome(){
         WelcomePanel w = new WelcomePanel();
