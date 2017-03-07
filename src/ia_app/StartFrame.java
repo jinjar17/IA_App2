@@ -107,6 +107,10 @@ public class StartFrame extends javax.swing.JFrame {
         this.add(a, BorderLayout.CENTER);
     }
     */
+    public WelcomePanel getHome(){
+        return p;
+    }
+    
     public void createGame(){
         GamePanel g = new GamePanel();
         g.setSize(400, 400);
@@ -114,7 +118,6 @@ public class StartFrame extends javax.swing.JFrame {
         g.setVisible(true);
         g.setParent(this);
     }
-    
     
     public void createHome(){
         WelcomePanel w = new WelcomePanel();

@@ -97,8 +97,8 @@ public class GamePanel extends javax.swing.JPanel {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.setVisible(false);
-        this.parentFrame.createHome();
-        System.out.println(g);
+        (this.parentFrame.getHome()).setVisible(true);
+        (this.parentFrame.getHome()).setPast("Past performance: " + g.toString());
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
