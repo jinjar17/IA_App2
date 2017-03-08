@@ -12,8 +12,8 @@ import java.awt.BorderLayout;
  * @author jinjar17
  */
 public class StartFrame extends javax.swing.JFrame {
+    
     private WelcomePanel p;
-    private GamePanel g;
     private javax.swing.JPanel panels[] = new javax.swing.JPanel[2];
     private int WIDTH = 400;
     /**
