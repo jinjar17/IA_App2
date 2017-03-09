@@ -119,12 +119,12 @@ public class StartFrame extends javax.swing.JFrame {
         g.setParent(this);
     }
     
-    public void createHome(){
-        WelcomePanel w = new WelcomePanel();
-        w.setSize(400, 400);
-        this.add(w, BorderLayout.CENTER);
-        w.setVisible(true);
-        w.setParent(this);
+    public void createAnalysis(){
+        AnalysisPanel a = new AnalysisPanel();
+        a.setSize(400, 400);
+        this.add(a, BorderLayout.CENTER);
+        a.setVisible(true);
+        a.setParent(this);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
