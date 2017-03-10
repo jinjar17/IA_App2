@@ -119,6 +119,14 @@ public class StartFrame extends javax.swing.JFrame {
         g.setParent(this);
     }
     
+    public void createStats(){
+        StatsPanel s = new StatsPanel();
+        s.setSize(400, 400);
+        this.add(s, BorderLayout.CENTER);
+        s.setVisible(true);
+        s.setParent(this);
+    }
+    
     public void createAnalysis(){
         AnalysisPanel a = new AnalysisPanel();
         a.setSize(400, 400);
