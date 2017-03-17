@@ -5,6 +5,14 @@
  */
 package ia_app;
 
+import java.io.File;
+import org.apache.poi.ss.usermodel.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 /**
  *
  * @author jinjar17
@@ -12,11 +20,60 @@ package ia_app;
 public class StatsPanel extends javax.swing.JPanel {
 
     private StartFrame parentFrame;
+    private static int mostFGs;
+    private static int most3Pts;
+    private int attempts;
+    private int makes;
     /**
      * Creates new form StatsPanel
      */
-    public StatsPanel() {
+    public StatsPanel() throws FileNotFoundException, IOException {
         initComponents();
+        
+        FileInputStream fis = new FileInputStream(new File("games.xls"));
+        HSSFWorkbook wb = new HSSFWorkbook(fis);
+        HSSFSheet sheet = wb.getSheetAt(0);
+        FormulaEvaluator forEval = wb.getCreationHelper().createFormulaEvaluator();
+        Row row1 = sheet.getRow(1);
+        for(Cell cell : row1){
+                switch(forEval.evaluateInCell(cell).getCellType()){
+                    case Cell.CELL_TYPE_NUMERIC:
+                        this.makes += cell.getNumericCellValue();
+                        break;
+                    case Cell.CELL_TYPE_STRING:
+                        break;
+                }
+            }
+        this.jTextFieldMakes.setText(makes + "");
+        
+        Row row2 = sheet.getRow(2);
+        for(Cell cell : row2){
+                switch(forEval.evaluateInCell(cell).getCellType()){
+                    case Cell.CELL_TYPE_NUMERIC:
+                        this.attempts += cell.getNumericCellValue();
+                        break;
+                    case Cell.CELL_TYPE_STRING:
+                        break;
+                }
+            }
+        this.jTextFieldAttempts.setText(attempts + "");
+        this.jTextFieldFGPct.setText(makes/attempts*100 + "%");
+        
+        
+        
+        /*for(Row column : sheet){
+            for(Cell cell : column){
+                switch(forEval.evaluateInCell(cell).getCellType()){
+                    case Cell.CELL_TYPE_NUMERIC:
+                        System.out.print(cell.getNumericCellValue() + "\t\t");
+                        break;
+                    case Cell.CELL_TYPE_STRING:
+                        break;
+                }
+            } 
+        }
+        */
+        
     }
 
     /**
@@ -34,8 +91,15 @@ public class StatsPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jTextFieldFGPct = new javax.swing.JTextField();
+        jTextField3Pct = new javax.swing.JTextField();
+        jTextFieldAttempts = new javax.swing.JTextField();
+        jTextFieldMakes = new javax.swing.JTextField();
+        jTextFieldMost3s = new javax.swing.JTextField();
+        jTextFieldMostFGs = new javax.swing.JTextField();
+        jTextFieldHighestFGPct = new javax.swing.JTextField();
 
-        jTextField1.setText("This is the Stats Panel");
+        jTextField1.setText("Welcome to the Stats Panel");
 
         jButton1.setText("Home");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -46,10 +110,10 @@ public class StatsPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
-                "FG %", "Total Attempts", "3Pt %", "Total shots made"
+                "FG %", "3Pt %", "Total attempts", "Total shots made"
             }
         ) {
             Class[] types = new Class [] {
@@ -64,7 +128,7 @@ public class StatsPanel extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
                 " Most 3s", "Most FGs", "Highest FG %"
@@ -72,18 +136,51 @@ public class StatsPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        jTextFieldFGPct.setText("jTextField2");
+
+        jTextField3Pct.setText("jTextField3");
+
+        jTextFieldAttempts.setText("jTextField4");
+
+        jTextFieldMakes.setText("jTextField5");
+
+        jTextFieldMost3s.setText("jTextField6");
+
+        jTextFieldMostFGs.setText("jTextField7");
+
+        jTextFieldHighestFGPct.setText("jTextField8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(60, 60, 60)
                 .addComponent(jButton1)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jTextField3Pct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jTextFieldAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldMakes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldMost3s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(jTextFieldMostFGs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldHighestFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,10 +189,22 @@ public class StatsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3Pct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMakes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldMost3s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMostFGs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldHighestFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(217, 217, 217))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,5 +224,12 @@ public class StatsPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3Pct;
+    private javax.swing.JTextField jTextFieldAttempts;
+    private javax.swing.JTextField jTextFieldFGPct;
+    private javax.swing.JTextField jTextFieldHighestFGPct;
+    private javax.swing.JTextField jTextFieldMakes;
+    private javax.swing.JTextField jTextFieldMost3s;
+    private javax.swing.JTextField jTextFieldMostFGs;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,15 @@
 package ia_app;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.io.File;
+import org.apache.poi.ss.usermodel.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 
 /**
  *
@@ -14,7 +23,6 @@ import java.awt.BorderLayout;
 public class StartFrame extends javax.swing.JFrame {
     
     private WelcomePanel p;
-    private javax.swing.JPanel panels[] = new javax.swing.JPanel[2];
     private int WIDTH = 400;
     /**
      * Creates new form StartFrame
@@ -24,16 +32,18 @@ public class StartFrame extends javax.swing.JFrame {
         this.p = new WelcomePanel();
         p.setParent(this);
         p.setSize(WIDTH, WIDTH);
-        /*createPanel(p);
-        this.g = new GamePanel();
-        g.setParent(this);
-        g.setSize(WIDTH, WIDTH);
-        createPanel(g);
-        this.panels[0] = p;
-        this.panels[1] = g;*/
         this.setLayout(new BorderLayout());
         this.add(p, BorderLayout.CENTER);
         p.setVisible(true);
+        
+        try{
+            HSSFWorkbook wb = new HSSFWorkbook();
+        }
+        
+        
+        Row rowHeading = sheet.createRow(0);
+        rowHeading.createCell(0).setCellValue("ID");
+        
     }
 
     /**
@@ -119,7 +129,7 @@ public class StartFrame extends javax.swing.JFrame {
         g.setParent(this);
     }
     
-    public void createStats(){
+    public void createStats() throws IOException{
         StatsPanel s = new StatsPanel();
         s.setSize(400, 400);
         this.add(s, BorderLayout.CENTER);
@@ -127,13 +137,6 @@ public class StartFrame extends javax.swing.JFrame {
         s.setParent(this);
     }
     
-    public void createAnalysis(){
-        AnalysisPanel a = new AnalysisPanel();
-        a.setSize(400, 400);
-        this.add(a, BorderLayout.CENTER);
-        a.setVisible(true);
-        a.setParent(this);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

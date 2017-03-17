@@ -5,6 +5,10 @@
  */
 package ia_app;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jinjar17
@@ -42,7 +46,7 @@ public class WelcomePanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Click here to start a new game");
+        jButton1.setText("Click here to start a new practice");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -98,7 +102,11 @@ public class WelcomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        parentFrame.createStats();
+        try {
+            parentFrame.createStats();
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
