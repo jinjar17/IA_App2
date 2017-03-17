@@ -35,14 +35,7 @@ public class StartFrame extends javax.swing.JFrame {
         this.setLayout(new BorderLayout());
         this.add(p, BorderLayout.CENTER);
         p.setVisible(true);
-        
-        try{
-            HSSFWorkbook wb = new HSSFWorkbook();
-        }
-        
-        
-        Row rowHeading = sheet.createRow(0);
-        rowHeading.createCell(0).setCellValue("ID");
+    
         
     }
 
