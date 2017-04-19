@@ -16,10 +16,10 @@ public class IA_App {
     
     
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        /*StartFrame f = new StartFrame();
+        StartFrame f = new StartFrame();
         f.setSize(500, 500);
         f.setVisible(true);
-        
+        /*
         FileInputStream fis = new FileInputStream(new File("games.xls"));
         HSSFWorkbook wb = new HSSFWorkbook(fis);
         HSSFSheet sheet = wb.getSheetAt(0);
@@ -39,7 +39,7 @@ public class IA_App {
             System.out.println("");
             
         }
-        */
+        
         
         try{
             String test[] = {"hello", "hey", "what's up"};
@@ -71,7 +71,7 @@ public class IA_App {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        
+        */
     }    
 
     

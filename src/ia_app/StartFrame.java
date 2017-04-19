@@ -6,14 +6,9 @@
 package ia_app;
 
 import java.awt.BorderLayout;
-import java.io.IOException;
-import java.io.File;
-import org.apache.poi.ss.usermodel.*;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 
 
 /**
@@ -27,7 +22,7 @@ public class StartFrame extends javax.swing.JFrame {
     /**
      * Creates new form StartFrame
      */
-    public StartFrame() {
+    public StartFrame(){
         initComponents();
         this.p = new WelcomePanel();
         p.setParent(this);
@@ -35,7 +30,7 @@ public class StartFrame extends javax.swing.JFrame {
         this.setLayout(new BorderLayout());
         this.add(p, BorderLayout.CENTER);
         p.setVisible(true);
-    
+        
         
     }
 
@@ -94,7 +89,7 @@ public class StartFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StartFrame().setVisible(true);
+                    new StartFrame().setVisible(true);
             }
         }); 
     }
@@ -110,16 +105,26 @@ public class StartFrame extends javax.swing.JFrame {
         this.add(a, BorderLayout.CENTER);
     }
     */
+    
+    
     public WelcomePanel getHome(){
         return p;
     }
     
-    public void createGame(){
+    public void createGame() throws FileNotFoundException{
         GamePanel g = new GamePanel();
         g.setSize(400, 400);
         this.add(g, BorderLayout.CENTER);
         g.setVisible(true);
         g.setParent(this);
+    }
+    
+    public void createPerformances() throws IOException{
+        PastPerformancesPanel p = new PastPerformancesPanel();
+        p.setSize(400, 400);
+        this.add(p, BorderLayout.CENTER);
+        p.setVisible(true);
+        p.setParent(this);
     }
     
     public void createStats() throws IOException{

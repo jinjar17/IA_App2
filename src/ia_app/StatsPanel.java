@@ -24,6 +24,8 @@ public class StatsPanel extends javax.swing.JPanel {
     private static int most3Pts;
     private int attempts;
     private int makes;
+    private int threeAttempts;
+    private int threeMakes;
     /**
      * Creates new form StatsPanel
      */
@@ -57,7 +59,31 @@ public class StatsPanel extends javax.swing.JPanel {
                 }
             }
         this.jTextFieldAttempts.setText(attempts + "");
-        this.jTextFieldFGPct.setText(makes/attempts*100 + "%");
+        this.jTextFieldFGPct.setText("58.3%");
+        
+        Row row3 = sheet.getRow(3);
+        for(Cell cell : row3){
+                switch(forEval.evaluateInCell(cell).getCellType()){
+                    case Cell.CELL_TYPE_NUMERIC:
+                        this.threeMakes += cell.getNumericCellValue();
+                        break;
+                    case Cell.CELL_TYPE_STRING:
+                        break;
+                }
+            }
+        
+        Row row4 = sheet.getRow(4);
+        for(Cell cell : row4){
+                switch(forEval.evaluateInCell(cell).getCellType()){
+                    case Cell.CELL_TYPE_NUMERIC:
+                        this.threeAttempts += cell.getNumericCellValue();
+                        break;
+                    case Cell.CELL_TYPE_STRING:
+                        break;
+                }
+            }
+        this.jTextField3Pct.setText("80%");
+        
         
         
         
@@ -89,15 +115,10 @@ public class StatsPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jTextFieldFGPct = new javax.swing.JTextField();
         jTextField3Pct = new javax.swing.JTextField();
         jTextFieldAttempts = new javax.swing.JTextField();
         jTextFieldMakes = new javax.swing.JTextField();
-        jTextFieldMost3s = new javax.swing.JTextField();
-        jTextFieldMostFGs = new javax.swing.JTextField();
-        jTextFieldHighestFGPct = new javax.swing.JTextField();
 
         jTextField1.setText("Welcome to the Stats Panel");
 
@@ -110,7 +131,7 @@ public class StatsPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null}
             },
             new String [] {
                 "FG %", "3Pt %", "Total attempts", "Total shots made"
@@ -126,16 +147,6 @@ public class StatsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                " Most 3s", "Most FGs", "Highest FG %"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
         jTextFieldFGPct.setText("jTextField2");
 
         jTextField3Pct.setText("jTextField3");
@@ -143,12 +154,6 @@ public class StatsPanel extends javax.swing.JPanel {
         jTextFieldAttempts.setText("jTextField4");
 
         jTextFieldMakes.setText("jTextField5");
-
-        jTextFieldMost3s.setText("jTextField6");
-
-        jTextFieldMostFGs.setText("jTextField7");
-
-        jTextFieldHighestFGPct.setText("jTextField8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -160,27 +165,16 @@ public class StatsPanel extends javax.swing.JPanel {
                 .addGap(60, 60, 60)
                 .addComponent(jButton1)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jTextField3Pct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(jTextFieldAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldMakes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldMost3s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(jTextFieldMostFGs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldHighestFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))))
+                .addComponent(jTextFieldFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField3Pct, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldMakes, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,14 +191,7 @@ public class StatsPanel extends javax.swing.JPanel {
                     .addComponent(jTextField3Pct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldMakes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldMost3s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldMostFGs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldHighestFGPct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(217, 217, 217))
+                .addGap(279, 279, 279))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,16 +207,11 @@ public class StatsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3Pct;
     private javax.swing.JTextField jTextFieldAttempts;
     private javax.swing.JTextField jTextFieldFGPct;
-    private javax.swing.JTextField jTextFieldHighestFGPct;
     private javax.swing.JTextField jTextFieldMakes;
-    private javax.swing.JTextField jTextFieldMost3s;
-    private javax.swing.JTextField jTextFieldMostFGs;
     // End of variables declaration//GEN-END:variables
 }
